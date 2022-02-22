@@ -59,10 +59,10 @@ router.post("", async (req, res) => {
       });
     }
 
-    if (password.length < 2) {
+    if (password.length < 8) {
       return res.json({
         status: "error",
-        error: "Password is less than 2 characters",
+        error: "Password is less than 8 characters",
       });
     }
 
