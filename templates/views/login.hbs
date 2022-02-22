@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+</head>
+<body style="color: aliceblue; background-color:rgb(126, 58, 182);">
+    <center>
+    <div style="color:black; background-color:powderblue">
+        {{>navbar}}
+    </div>
+    <h1>Login</h1>
+    <form id="login-form">
+        <div class="container">
+            <div class="form-control">    
+                <label for="username"><b>User Name</b></label>
+                <input type="text" id="username" name="username" autocomplete="off" placeholder="Username"/>
+            </div>
+            <div class="form-control">
+                <label for="password"><b>Password</b></label>
+                <input type="password" id="password" name="password" autocomplete="off" placeholder="Password"/>
+            </div> 
+    
+        <input type="submit" value="Login"/>
+        </div>
+    </form>
+    <script type="text/javascript">
+        const form=document.getElementById("login-form")
+        form.addEventListener("submit",loginUser)
+
+        //We can send data as JSON popular among Node while using JS
+        //OR 
+        //We can send data as URLencoded which is the default format and popular among PHP
+
+        async function loginUser(event)
+        {
+            event.preventDefault()
+            const username=document.getElementById("username").value
+            const password=document.getElementById("password").value
+            const result = await fetch("/api/login",{
+                method:'POST',
+                headers:{
+                    'Content-Type':'application/json'
+                },
+                body:JSON.stringify({
+                    username,
+                    password
+                })
+            }).then((res)=>res.json())
+
+            //console.log(result)
+            if (result.status === "OK") {
+                //means everything went fine
+                //console.log("Got the token: ",result.data)
+                //localStorage.setItem("token",result.data)
+                window.alert("Logged In Successfully");
+                window.location.href="/api/profile";
+            } else {
+                window.alert(result.error);
+            }
+        }
+    </script>
+    </center>
+</body>
+</html>

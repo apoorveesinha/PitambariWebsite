@@ -1,0 +1,79 @@
+@import url("https://fonts.googleapis.com/css2?family=Dancing+Script:wght@500&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Dancing+Script:wght@500&family=Neucha&display=swap");
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --myfont: "Dancing Script", cursive;
+  --my-confirmbtn-font: "Neucha", cursive;
+  --lg-lightcolor: linear-gradient(
+    to left.rgba(116, 235, 213, 0.6),
+    rgba(159, 172, 230, 0)
+  );
+  --lg-color: linear-gradient(to left, #74ebd5, #9face6);
+}
+
+body {
+  background-size: 100%;
+  background-repeat: no-repeat;
+  font-family: var(--myfont);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  width: 100vw;
+}
+
+.container {
+  background-color: #fff;
+  border-radius: 10px;
+  -webkit-border-radius: 10px;
+  box-shadow: 0 2.8px 2.2px rgba(0, 0, 0, 0.034);
+  overflow: hidden;
+  width: calc(100vw - 65vw);
+  max-width: 100%;
+}
+
+.header {
+  background: var(--lg-color);
+  padding: 30px 0;
+}
+
+.header h1 {
+  color: #222;
+  font-family: var(--my-confirmbtn-font);
+  font-size: 24px;
+  text-transform: uppercase;
+  text-align: center;
+}
+
+.registrationForm .submit-btn {
+  background: var(--lg-color);
+  border-radius: 6px;
+  border: none;
+  outline: none;
+  color: #fff;
+  display: block;
+  font-family: var(--my-confirmbtn-font);
+  font-size: 16px;
+  padding: 15px 0;
+  margin-top: 20px;
+  width: 100%;
+  font-weight: bold;
+  text-transform: uppercase;
+  transition: all 1s ease;
+}
+
+.form .submit-btn:hover {
+  background: linear-gradient(to right, #74ebd5, #9face6);
+}
+
+@media (max-width: 998px) {
+  .container {
+    width: calc(100vw-35vw);
+    max-width: 100%;
+  }
+}

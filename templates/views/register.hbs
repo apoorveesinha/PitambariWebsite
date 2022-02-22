@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Register</title>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" integrity="sha512-PgQMlq+nqFLV4ylk1gwUOgm6CtIIXkKwaIHp/PAIWHzig/lKZSEGKEysh0TCVbHJXCLN7WetD8TFecIky75ZfQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+        <link rel="stylesheet" type="text/css" href="style.css"/>
+
+    </head>
+    <body style="color: aliceblue; background-color:rgb(126, 58, 182);">
+        <center>
+        <div class="navbar" style="color:black; background-color:powderblue">
+            {{>navbar}}
+        </div>
+        <div class="container">
+            <div class="header">
+                <h1>Registration Form</h1>
+            </div>
+            <form class="registrationForm" id="registrationForm" style="color: aliceblue; background-color:rgb(126, 58, 182);">
+                <div class="form-control">
+                    <label for="firstname"><b>First Name: </b></label>
+                    <input type="text" id="firstname" name="firstname" autocomplete="off" value="" placeholder="First Name"/>
+                    <i class="fa-solid fa-circle-check"></i>
+                    <i class="fa-solid fa-circle-exclamation"></i>
+                </div>
+
+                <div class="form-control">
+                    <label for="lastname"><b>Last Name: </b></label>
+                    <input type="text" id="lastname" name="lastname" autocomplete="off" value="" placeholder="Last Name"/>
+                    <i class="fa-solid fa-circle-check"></i>
+                    <i class="fa-solid fa-circle-exclamation"></i>
+                </div>
+
+                <div class="form-control">    
+                    <label for="username"><b>User Name</b></label>
+                    <input type="text" id="username" name="username" autocomplete="off" value="" placeholder="Username"/>
+                    <i class="fa-solid fa-circle-check"></i>
+                    <i class="fa-solid fa-circle-exclamation"></i>
+                </div>
+
+                <div class="form-control">    
+                    <label for="emailID"><b>Email ID: </b></label>
+                    <input type="email" id="emailID" name="emailID" autocomplete="off" placeholder="Ex. rahulgarg@gmail.com"/>
+                    <i class="fa-solid fa-circle-check"></i>
+                    <i class="fa-solid fa-circle-exclamation"></i>
+                </div>
+
+
+                <div class="form-control">    
+                    <label>
+                    <input type="radio" id="m" name="gender" autocomplete="off" value="male" checked="checked"/>
+                    <span>Male</span>
+                    </label>
+                    <label>
+                        <input type="radio" id="f" name="gender" autocomplete="off" value="female"/>
+                        <span>Female</span>
+                    </label>
+                </div>
+
+                <div class="form-control">    
+                    <label for="age"><b>Age: </b></label>
+                    <input type="text" id="age" name="age" autocomplete="off" placeholder="Enter your age" />
+                    <i class="fa-solid fa-circle-check"></i>
+                    <i class="fa-solid fa-circle-exclamation"></i>
+                </div>    
+                
+                <div class="form-control">
+                    <label for="phoneNumber"><b>Phone Number: </b></label>
+                    <input type="text" id="phoneNumber" name="phoneNumber" minlength="10" maxlength="10" autocomplete="off" value="" placeholder="Ex. 2971789287"/>
+                    <i class="fa-solid fa-circle-check"></i>
+                    <i class="fa-solid fa-circle-exclamation"></i>
+                </div>    
+                
+                <div class="form-control">
+                    <label for="password"><b>Password</b></label>
+                    <input type="password" id="password" name="password" autocomplete="off" value="" placeholder="Password"/>
+                    <i class="fa-solid fa-circle-check"></i>
+                    <i class="fa-solid fa-circle-exclamation"></i>
+                </div>    
+                
+                <div class="form-control">
+                    <label for="confirmPassword"><b>Confirm Password</b></label>
+                    <input type="password" id="confirmPassword" name="confirmPassword" autocomplete="off" value="" placeholder="Confirm Password"/>
+                    <i class="fa-solid fa-circle-check"></i>
+                    <i class="fa-solid fa-circle-exclamation"></i>
+                </div>    
+                
+                <input type="submit" value="Submit Form" class="submit-btn"/>
+
+            </form>
+
+        </div>
+        <script type="text/javascript">
+            const form=document.getElementById("registrationForm")
+            form.addEventListener("submit",registerUser)
+
+            //We can send data as JSON popular among Node while using JS
+            //OR 
+            //We can send data as URLencoded which is the default format and popular among PHP
+
+            async function registerUser(event)
+            {
+                event.preventDefault()
+                const firstname=document.getElementById("firstname").value
+                const lastname=document.getElementById("lastname").value
+                const username=document.getElementById("username").value
+                const emailID=document.getElementById("emailID").value
+                //gender
+                var g;
+                if(document.getElementById("m").checked){
+                    g=document.getElementById('m').value
+                }
+                else{
+                    g=document.getElementById('f').value
+                }
+                const gender=g;
+                //age
+                const age=document.getElementById("age").value
+                //phone number
+                const phoneNumber=document.getElementById("phoneNumber").value
+                //password
+                const password=document.getElementById("password").value
+                //confirm password
+                const confirmPassword=document.getElementById("confirmPassword").value
+
+                //const userdata={
+                    
+                //}
+
+                //console.log(userdata);
+                const result = await fetch('/api/register',{
+                    method:'POST',
+                    headers:{
+                        'Content-Type':'application/json'
+                    },
+                    body:JSON.stringify({
+                    firstname,
+                    lastname,
+                    username,
+                    emailID,
+                    gender,
+                    age,
+                    phoneNumber,
+                    password,
+                    confirmPassword
+                    })
+                })
+                .then((res)=>res.json())
+
+                console.log(result);
+                if (result.status === "OK") {
+                    //means everything went fine
+                    window.alert("Registration Successful");
+                    window.location.href="/api/login";
+                } else {
+                    window.alert(result.error);
+                }
+            }
+        </script>
+    </center>
+    </body>
+</html>
