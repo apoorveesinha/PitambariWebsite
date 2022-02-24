@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 const url = "mongodb://localhost:27017/PitaambariWebsiteDB";
 mongoose.connect(url, {
   useNewUrlParser: true,
-  useUnifiedTopology: true,
+  //useUnifiedTopology: true,
 });
 const conn = mongoose.connection;
 conn.once("open", () => {

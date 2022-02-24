@@ -1,7 +1,7 @@
 {
   "name": "mernbackend",
   "version": "1.0.0",
-  "description": "",
+  "description": "Welcome to this git repository!\r This repository will serve as a beginner mernbackend source code. I have implemented some basic registration, authentication, login, profile and logout features using",
   "main": "src/server.js",
   "scripts": {
     "start": "nodemon src/server.js -e js,hbs"
@@ -25,13 +25,21 @@
     "bcrypt": "^5.0.1",
     "cookie-parser": "^1.4.6",
     "dotenv": "^16.0.0",
-    "express": "^4.17.2",
+    "express": "^4.17.3",
     "hbs": "^4.2.0",
     "jsonwebtoken": "^8.5.1",
-    "mongoose": "^6.2.1",
+    "mongoose": "^6.2.3",
     "path": "^0.12.7"
   },
   "devDependencies": {
     "nodemon": "^2.0.15"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/apoorveesinha/PitambariWebsite.git"
+  },
+  "bugs": {
+    "url": "https://github.com/apoorveesinha/PitambariWebsite/issues"
+  },
+  "homepage": "https://github.com/apoorveesinha/PitambariWebsite#readme"
 }
